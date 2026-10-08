@@ -19,6 +19,24 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos so you can pick a profile picture from your gallery.",
+          "microphonePermission": false
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos to manage your profile picture.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save your profile picture to your gallery.",
+          "isAccessMediaLocationEnabled": false
+        }
+      ],
+      "expo-sqlite"
+    ]
   }
 }
