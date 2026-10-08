@@ -1,20 +1,28 @@
+import React, { useEffect } from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { BookingProvider } from './src/contexts/BookingContext';
+import { ProfileProvider } from './src/contexts/ProfileContext';
+import AppNavigator from './src/navigation/AppNavigator';
+import { initDatabase } from './src/services/db';
 
 export default function App() {
+  useEffect(() => {
+    try {
+      initDatabase();
+    } catch (e) {
+      console.warn('[App] initDatabase failed:', e);
+    }
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <BookingProvider>
+        <ProfileProvider>
+          <StatusBar style="dark" />
+          <AppNavigator />
+        </ProfileProvider>
+      </BookingProvider>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
